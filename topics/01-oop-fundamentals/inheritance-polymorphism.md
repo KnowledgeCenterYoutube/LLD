@@ -10,7 +10,7 @@ Inheritance is a mechanism that allows a class to inherit properties and methods
 ```mermaid
 classDiagram
     class Animal {
-        +String name
+        +string name
         +makeSound()
     }
     class Dog {
@@ -28,94 +28,96 @@ classDiagram
 ```
 
 ### Single Inheritance Example
-```java
-public class Animal {
-    protected String name;
+```cpp
+class Animal {
+protected:
+    string name;
     
-    public Animal(String name) {
-        this.name = name;
+public:
+    Animal(const string& name) : name(name) {}
+    
+    virtual void makeSound() {
+        cout << "Some sound" << endl;
     }
     
-    public void makeSound() {
-        System.out.println("Some sound");
-    }
-}
+    virtual ~Animal() = default;
+};
 
-public class Dog extends Animal {
-    public Dog(String name) {
-        super(name);
+class Dog : public Animal {
+public:
+    Dog(const string& name) : Animal(name) {}
+    
+    void makeSound() override {
+        cout << "Woof!" << endl;
     }
     
-    @Override
-    public void makeSound() {
-        System.out.println("Woof!");
+    void fetch() {
+        cout << name << " is fetching the ball" << endl;
     }
-    
-    public void fetch() {
-        System.out.println(name + " is fetching the ball");
-    }
-}
+};
 ```
 
 ## Polymorphism
 Polymorphism allows objects of different classes to be treated as objects of a common superclass.
 
 ### Types of Polymorphism
-1. **Compile-time Polymorphism (Method Overloading)**
-2. **Runtime Polymorphism (Method Overriding)**
+1. **Compile-time Polymorphism (Function Overloading)**
+2. **Runtime Polymorphism (Virtual Functions)**
 
-### Method Overloading
-```java
-public class Calculator {
-    public int add(int a, int b) {
+### Function Overloading
+```cpp
+class Calculator {
+public:
+    int add(int a, int b) {
         return a + b;
     }
     
-    public double add(double a, double b) {
+    double add(double a, double b) {
         return a + b;
     }
     
-    public int add(int a, int b, int c) {
+    int add(int a, int b, int c) {
         return a + b + c;
     }
-}
+};
 ```
 
-### Method Overriding
-```java
-public class Shape {
-    public double calculateArea() {
+### Virtual Functions
+```cpp
+class Shape {
+public:
+    virtual double calculateArea() const {
         return 0;
     }
-}
+    
+    virtual ~Shape() = default;
+};
 
-public class Circle extends Shape {
-    private double radius;
+class Circle : public Shape {
+private:
+    double radius;
     
-    public Circle(double radius) {
-        this.radius = radius;
-    }
+public:
+    Circle(double radius) : radius(radius) {}
     
-    @Override
-    public double calculateArea() {
-        return Math.PI * radius * radius;
+    double calculateArea() const override {
+        return M_PI * radius * radius;
     }
-}
+};
 
-public class Rectangle extends Shape {
-    private double width;
-    private double height;
+class Rectangle : public Shape {
+private:
+    double width;
+    double height;
     
-    public Rectangle(double width, double height) {
-        this.width = width;
-        this.height = height;
-    }
+public:
+    Rectangle(double width, double height) 
+        : width(width), height(height) {}
     
-    @Override
-    public double calculateArea() {
+    double calculateArea() const override {
         return width * height;
     }
-}
+};
 ```
 
 ## Polymorphism in Action
@@ -147,56 +149,55 @@ graph TD
 3. Design a `MediaPlayer` with support for different file formats
 
 ## Interview Questions
-1. What is the difference between method overloading and overriding?
-2. How does polymorphism work in Java?
-3. What is the purpose of the `super` keyword?
-4. Explain the concept of dynamic method dispatch.
+1. What is the difference between function overloading and overriding?
+2. How does polymorphism work in C++?
+3. What is the purpose of the `virtual` keyword?
+4. Explain the concept of dynamic binding.
 5. When should you use inheritance vs. composition?
 
 ## Code Example: Payment System
-```java
-public abstract class Payment {
-    protected double amount;
+```cpp
+class Payment {
+protected:
+    double amount;
     
-    public Payment(double amount) {
-        this.amount = amount;
-    }
+public:
+    Payment(double amount) : amount(amount) {}
+    virtual ~Payment() = default;
     
-    public abstract void process();
-}
+    virtual void process() = 0;
+};
 
-public class CreditCardPayment extends Payment {
-    private String cardNumber;
+class CreditCardPayment : public Payment {
+private:
+    string cardNumber;
     
-    public CreditCardPayment(double amount, String cardNumber) {
-        super(amount);
-        this.cardNumber = cardNumber;
-    }
+public:
+    CreditCardPayment(double amount, const string& cardNumber)
+        : Payment(amount), cardNumber(cardNumber) {}
     
-    @Override
-    public void process() {
-        System.out.println("Processing credit card payment of $" + amount);
+    void process() override {
+        cout << "Processing credit card payment of $" << amount << endl;
     }
-}
+};
 
-public class PayPalPayment extends Payment {
-    private String email;
+class PayPalPayment : public Payment {
+private:
+    string email;
     
-    public PayPalPayment(double amount, String email) {
-        super(amount);
-        this.email = email;
-    }
+public:
+    PayPalPayment(double amount, const string& email)
+        : Payment(amount), email(email) {}
     
-    @Override
-    public void process() {
-        System.out.println("Processing PayPal payment of $" + amount);
+    void process() override {
+        cout << "Processing PayPal payment of $" << amount << endl;
     }
-}
+};
 ```
 
 ## Summary
 - Inheritance enables code reuse through parent-child relationships
 - Polymorphism allows different objects to be treated uniformly
-- Method overloading provides multiple ways to call a method
-- Method overriding allows subclasses to provide specific implementations
+- Function overloading provides multiple ways to call a function
+- Virtual functions allow derived classes to provide specific implementations
 - Proper use of inheritance and polymorphism leads to flexible and maintainable code 

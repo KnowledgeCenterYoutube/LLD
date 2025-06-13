@@ -17,8 +17,8 @@ An object is an instance of a class. It represents a specific entity with its ow
 ```mermaid
 classDiagram
     class Car {
-        -String brand
-        -String model
+        -string brand
+        -string model
         -int year
         +start()
         +stop()
@@ -31,51 +31,48 @@ classDiagram
 ## Key Concepts
 
 ### 1. Class Declaration
-```java
-public class Car {
+```cpp
+class Car {
+private:
     // Attributes
-    private String brand;
-    private String model;
-    private int year;
+    string brand;
+    string model;
+    int year;
     
+public:
     // Constructor
-    public Car(String brand, String model, int year) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-    }
+    Car(const string& brand, const string& model, int year) 
+        : brand(brand), model(model), year(year) {}
     
     // Methods
-    public void start() {
-        System.out.println("Car is starting...");
+    void start() {
+        cout << "Car is starting..." << endl;
     }
     
-    public void stop() {
-        System.out.println("Car is stopping...");
+    void stop() {
+        cout << "Car is stopping..." << endl;
     }
-}
+};
 ```
 
 ### 2. Object Creation
-```java
+```cpp
 // Creating objects
-Car myCar = new Car("Toyota", "Camry", 2023);
-Car friendCar = new Car("Honda", "Civic", 2022);
+Car myCar("Toyota", "Camry", 2023);
+Car friendCar("Honda", "Civic", 2022);
 ```
 
 ## Memory Representation
 ```mermaid
 graph TD
-    A[Stack Memory] --> B[myCar Reference]
-    A --> C[friendCar Reference]
-    B --> D[Heap Memory: Car Object 1]
-    C --> E[Heap Memory: Car Object 2]
-    D --> F[brand: Toyota]
-    D --> G[model: Camry]
-    D --> H[year: 2023]
-    E --> I[brand: Honda]
-    E --> J[model: Civic]
-    E --> K[year: 2022]
+    A[Stack Memory] --> B[myCar Object]
+    A --> C[friendCar Object]
+    B --> D[brand: Toyota]
+    B --> E[model: Camry]
+    B --> F[year: 2023]
+    C --> G[brand: Honda]
+    C --> H[model: Civic]
+    C --> I[year: 2022]
 ```
 
 ## Best Practices
@@ -103,29 +100,36 @@ graph TD
 5. How do you ensure proper encapsulation in a class?
 
 ## Code Example: Student Management System
-```java
-public class Student {
-    private String name;
-    private int rollNumber;
-    private Map<String, Double> grades;
+```cpp
+#include <string>
+#include <map>
+#include <vector>
+#include <numeric>
+
+class Student {
+private:
+    string name;
+    int rollNumber;
+    map<string, double> grades;
     
-    public Student(String name, int rollNumber) {
-        this.name = name;
-        this.rollNumber = rollNumber;
-        this.grades = new HashMap<>();
+public:
+    Student(const string& name, int rollNumber) 
+        : name(name), rollNumber(rollNumber) {}
+    
+    void addGrade(const string& subject, double grade) {
+        grades[subject] = grade;
     }
     
-    public void addGrade(String subject, double grade) {
-        grades.put(subject, grade);
+    double getAverageGrade() const {
+        if (grades.empty()) return 0.0;
+        
+        double sum = 0.0;
+        for (const auto& grade : grades) {
+            sum += grade.second;
+        }
+        return sum / grades.size();
     }
-    
-    public double getAverageGrade() {
-        return grades.values().stream()
-                    .mapToDouble(Double::doubleValue)
-                    .average()
-                    .orElse(0.0);
-    }
-}
+};
 ```
 
 ## Summary

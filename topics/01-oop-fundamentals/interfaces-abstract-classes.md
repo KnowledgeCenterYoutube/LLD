@@ -11,7 +11,7 @@ An abstract class is a class that cannot be instantiated and may contain both ab
 classDiagram
     class AbstractAnimal {
         <<abstract>>
-        +String name
+        +string name
         +makeSound()*
         +move()*
         +displayInfo()
@@ -29,39 +29,38 @@ classDiagram
 ```
 
 ### Abstract Class Example
-```java
-public abstract class AbstractAnimal {
-    protected String name;
+```cpp
+class AbstractAnimal {
+protected:
+    string name;
     
-    public AbstractAnimal(String name) {
-        this.name = name;
-    }
+public:
+    AbstractAnimal(const string& name) : name(name) {}
     
-    // Abstract methods
-    public abstract void makeSound();
-    public abstract void move();
+    // Pure virtual methods
+    virtual void makeSound() = 0;
+    virtual void move() = 0;
     
     // Concrete method
-    public void displayInfo() {
-        System.out.println("Name: " + name);
+    void displayInfo() const {
+        cout << "Name: " << name << endl;
     }
-}
+    
+    virtual ~AbstractAnimal() = default;
+};
 
-public class Dog extends AbstractAnimal {
-    public Dog(String name) {
-        super(name);
+class Dog : public AbstractAnimal {
+public:
+    Dog(const string& name) : AbstractAnimal(name) {}
+    
+    void makeSound() override {
+        cout << "Woof!" << endl;
     }
     
-    @Override
-    public void makeSound() {
-        System.out.println("Woof!");
+    void move() override {
+        cout << "Dog is running" << endl;
     }
-    
-    @Override
-    public void move() {
-        System.out.println("Dog is running");
-    }
-}
+};
 ```
 
 ## Interfaces
@@ -91,30 +90,30 @@ classDiagram
 ```
 
 ### Interface Example
-```java
-public interface PaymentProcessor {
-    boolean processPayment(double amount);
-    void refund(double amount);
-    String getTransactionId();
-}
+```cpp
+class PaymentProcessor {
+public:
+    virtual bool processPayment(double amount) = 0;
+    virtual void refund(double amount) = 0;
+    virtual string getTransactionId() = 0;
+    virtual ~PaymentProcessor() = default;
+};
 
-public class CreditCardProcessor implements PaymentProcessor {
-    @Override
-    public boolean processPayment(double amount) {
+class CreditCardProcessor : public PaymentProcessor {
+public:
+    bool processPayment(double amount) override {
         // Implementation
         return true;
     }
     
-    @Override
-    public void refund(double amount) {
+    void refund(double amount) override {
         // Implementation
     }
     
-    @Override
-    public String getTransactionId() {
-        return "CC-" + System.currentTimeMillis();
+    string getTransactionId() override {
+        return "CC-" + to_string(time(nullptr));
     }
-}
+};
 ```
 
 ## Comparison
@@ -128,7 +127,7 @@ graph TD
     A --> E[Single inheritance]
     F[Interface] --> G[No constructors]
     F --> H[Only constants]
-    F --> I[All methods abstract]
+    F --> I[All methods pure virtual]
     F --> J[Multiple inheritance]
 ```
 
@@ -170,48 +169,50 @@ graph TD
 2. When would you use an abstract class over an interface?
 3. Can an interface extend another interface?
 4. Can an abstract class implement an interface?
-5. What is the purpose of default methods in interfaces?
+5. What is the purpose of pure virtual functions in C++?
 
 ## Code Example: Logger Implementation
-```java
-public interface Logger {
-    void log(String message);
-    void error(String message);
-    void warn(String message);
-}
+```cpp
+class Logger {
+public:
+    virtual void log(const string& message) = 0;
+    virtual void error(const string& message) = 0;
+    virtual void warn(const string& message) = 0;
+    virtual ~Logger() = default;
+};
 
-public abstract class AbstractLogger implements Logger {
-    protected String formatMessage(String level, String message) {
-        return String.format("[%s] %s: %s", 
-            new java.util.Date(), level, message);
+class AbstractLogger : public Logger {
+protected:
+    string formatMessage(const string& level, const string& message) const {
+        time_t now = time(nullptr);
+        char* dt = ctime(&now);
+        dt[strlen(dt) - 1] = '\0';  // Remove newline
+        return "[" + string(dt) + "] " + level + ": " + message;
     }
-}
+};
 
-public class FileLogger extends AbstractLogger {
-    private String filePath;
+class FileLogger : public AbstractLogger {
+private:
+    string filePath;
     
-    public FileLogger(String filePath) {
-        this.filePath = filePath;
-    }
+public:
+    FileLogger(const string& filePath) : filePath(filePath) {}
     
-    @Override
-    public void log(String message) {
+    void log(const string& message) override {
         // Write to file
-        System.out.println(formatMessage("INFO", message));
+        cout << formatMessage("INFO", message) << endl;
     }
     
-    @Override
-    public void error(String message) {
+    void error(const string& message) override {
         // Write to file
-        System.out.println(formatMessage("ERROR", message));
+        cout << formatMessage("ERROR", message) << endl;
     }
     
-    @Override
-    public void warn(String message) {
+    void warn(const string& message) override {
         // Write to file
-        System.out.println(formatMessage("WARN", message));
+        cout << formatMessage("WARN", message) << endl;
     }
-}
+};
 ```
 
 ## Summary

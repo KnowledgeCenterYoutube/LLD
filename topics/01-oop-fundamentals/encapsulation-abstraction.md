@@ -11,8 +11,8 @@ Encapsulation is the bundling of data and methods that operate on that data with
 classDiagram
     class BankAccount {
         -double balance
-        -String accountNumber
-        -String accountHolder
+        -string accountNumber
+        -string accountHolder
         +deposit(double amount)
         +withdraw(double amount)
         +getBalance()
@@ -21,28 +21,27 @@ classDiagram
 ```
 
 ### Example of Encapsulation
-```java
-public class BankAccount {
+```cpp
+class BankAccount {
+private:
     // Private fields (data hiding)
-    private double balance;
-    private String accountNumber;
-    private String accountHolder;
+    double balance;
+    string accountNumber;
+    string accountHolder;
     
+public:
     // Constructor
-    public BankAccount(String accountNumber, String accountHolder) {
-        this.accountNumber = accountNumber;
-        this.accountHolder = accountHolder;
-        this.balance = 0.0;
-    }
+    BankAccount(const string& accountNumber, const string& accountHolder)
+        : accountNumber(accountNumber), accountHolder(accountHolder), balance(0.0) {}
     
     // Public methods (interface)
-    public void deposit(double amount) {
+    void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
         }
     }
     
-    public boolean withdraw(double amount) {
+    bool withdraw(double amount) {
         if (amount > 0 && amount <= balance) {
             balance -= amount;
             return true;
@@ -50,14 +49,14 @@ public class BankAccount {
         return false;
     }
     
-    public double getBalance() {
+    double getBalance() const {
         return balance;
     }
     
-    public String getAccountNumber() {
+    string getAccountNumber() const {
         return accountNumber;
     }
-}
+};
 ```
 
 ## Abstraction
@@ -74,64 +73,65 @@ graph TD
 ```
 
 ### Abstract Class Example
-```java
-public abstract class Vehicle {
-    protected String brand;
-    protected String model;
+```cpp
+class Vehicle {
+protected:
+    string brand;
+    string model;
     
-    public Vehicle(String brand, String model) {
-        this.brand = brand;
-        this.model = model;
-    }
+public:
+    Vehicle(const string& brand, const string& model)
+        : brand(brand), model(model) {}
     
-    // Abstract method
-    public abstract void start();
+    // Pure virtual method
+    virtual void start() = 0;
     
     // Concrete method
-    public void displayInfo() {
-        System.out.println("Brand: " + brand);
-        System.out.println("Model: " + model);
-    }
-}
-
-public class Car extends Vehicle {
-    public Car(String brand, String model) {
-        super(brand, model);
+    void displayInfo() const {
+        cout << "Brand: " << brand << endl;
+        cout << "Model: " << model << endl;
     }
     
-    @Override
-    public void start() {
-        System.out.println("Car is starting...");
+    virtual ~Vehicle() = default;
+};
+
+class Car : public Vehicle {
+public:
+    Car(const string& brand, const string& model)
+        : Vehicle(brand, model) {}
+    
+    void start() override {
+        cout << "Car is starting..." << endl;
     }
-}
+};
 ```
 
 ### Interface Example
-```java
-public interface PaymentProcessor {
-    boolean processPayment(double amount);
-    void refund(double amount);
-    String getTransactionId();
-}
+```cpp
+class PaymentProcessor {
+public:
+    virtual bool processPayment(double amount) = 0;
+    virtual void refund(double amount) = 0;
+    virtual string getTransactionId() = 0;
+    virtual ~PaymentProcessor() = default;
+};
 
-public class CreditCardProcessor implements PaymentProcessor {
-    @Override
-    public boolean processPayment(double amount) {
+class CreditCardProcessor : public PaymentProcessor {
+public:
+    bool processPayment(double amount) override {
         // Implementation details
         return true;
     }
     
-    @Override
-    public void refund(double amount) {
+    void refund(double amount) override {
         // Implementation details
     }
     
-    @Override
-    public String getTransactionId() {
+    string getTransactionId() override {
         // Implementation details
         return "TXN123";
     }
-}
+};
 ```
 
 ## Best Practices
@@ -170,34 +170,34 @@ public class CreditCardProcessor implements PaymentProcessor {
 5. What are the benefits of data hiding?
 
 ## Code Example: Temperature Converter
-```java
-public class TemperatureConverter {
-    private double celsius;
+```cpp
+class TemperatureConverter {
+private:
+    double celsius;
     
-    public TemperatureConverter(double celsius) {
-        this.celsius = celsius;
-    }
+public:
+    TemperatureConverter(double celsius) : celsius(celsius) {}
     
-    public double getCelsius() {
+    double getCelsius() const {
         return celsius;
     }
     
-    public void setCelsius(double celsius) {
+    void setCelsius(double celsius) {
         if (celsius >= -273.15) { // Absolute zero
-            this.celsius = celsius;
+            this->celsius = celsius;
         } else {
-            throw new IllegalArgumentException("Temperature cannot be below absolute zero");
+            throw invalid_argument("Temperature cannot be below absolute zero");
         }
     }
     
-    public double getFahrenheit() {
+    double getFahrenheit() const {
         return (celsius * 9/5) + 32;
     }
     
-    public double getKelvin() {
+    double getKelvin() const {
         return celsius + 273.15;
     }
-}
+};
 ```
 
 ## Summary
