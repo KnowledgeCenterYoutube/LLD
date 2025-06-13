@@ -1,8 +1,8 @@
-# Low Level Design (LLD) Interview Preparation
+# Low Level Design (LLD) Course
 
-This repository contains comprehensive materials and examples for preparing for Low Level Design (LLD) interviews. The content is organized to help you master object-oriented design principles, design patterns, and best practices for creating maintainable and scalable software systems.
+This repository contains comprehensive materials for learning Low Level Design principles and patterns. The content is organized into topics, each with detailed explanations, code examples, and practice problems.
 
-## Course Structure
+## Table of Contents
 
 ### 1. Object-Oriented Programming Fundamentals
 - [Classes and Objects](topics/01-oop-fundamentals/classes-and-objects.md)
@@ -11,11 +11,12 @@ This repository contains comprehensive materials and examples for preparing for 
 - [Interfaces and Abstract Classes](topics/01-oop-fundamentals/interfaces-abstract-classes.md)
 
 ### 2. SOLID Principles
-- [Single Responsibility Principle](topics/02-solid-principles/srp.md)
-- [Open/Closed Principle](topics/02-solid-principles/ocp.md)
-- [Liskov Substitution Principle](topics/02-solid-principles/lsp.md)
-- [Interface Segregation Principle](topics/02-solid-principles/isp.md)
-- [Dependency Inversion Principle](topics/02-solid-principles/dip.md)
+- [Single Responsibility Principle (SRP)](topics/02-solid-principles/srp.md)
+- [Open/Closed Principle (OCP)](topics/02-solid-principles/ocp.md)
+- [Liskov Substitution Principle (LSP)](topics/02-solid-principles/lsp.md)
+- [Interface Segregation Principle (ISP)](topics/02-solid-principles/isp.md)
+- [Dependency Inversion Principle (DIP)](topics/02-solid-principles/dip.md)
+- [SOLID Principles Summary](topics/02-solid-principles/summary.md)
 
 ### 3. Design Patterns
 #### Creational Patterns
@@ -40,49 +41,23 @@ This repository contains comprehensive materials and examples for preparing for 
 - [State](topics/03-design-patterns/behavioral/state.md)
 - [Template Method](topics/03-design-patterns/behavioral/template-method.md)
 
-### 4. Code Quality and Best Practices
-- [Clean Code Principles](topics/04-code-quality/clean-code.md)
-- [Code Smells and Refactoring](topics/04-code-quality/code-smells.md)
-- [Unit Testing](topics/04-code-quality/unit-testing.md)
-- [Error Handling](topics/04-code-quality/error-handling.md)
+### 4. Code Smells and Refactoring
+- Coming soon...
 
-### 5. Common LLD Problems and Solutions
-- [Parking Lot System](topics/05-common-problems/parking-lot.md)
-- [Elevator System](topics/05-common-problems/elevator.md)
-- [Vending Machine](topics/05-common-problems/vending-machine.md)
-- [Chess Game](topics/05-common-problems/chess.md)
-- [Library Management System](topics/05-common-problems/library-management.md)
+### 5. Testing and Testability
+- Coming soon...
 
-### 6. Interview Preparation
-- [Common Interview Questions](topics/06-interview-prep/common-questions.md)
-- [Problem-Solving Approach](topics/06-interview-prep/problem-solving.md)
-- [Code Review Best Practices](topics/06-interview-prep/code-review.md)
-- [System Design Considerations](topics/06-interview-prep/system-design.md)
+## Getting Started
 
-## How to Use This Repository
-
-1. Start with the fundamentals in Section 1 if you need to brush up on OOP concepts
-2. Move through SOLID principles in Section 2 to understand good design practices
-3. Study design patterns in Section 3 to learn common solutions to recurring problems
-4. Review code quality guidelines in Section 4
-5. Practice with common problems in Section 5
-6. Use Section 6 for interview preparation
-
-Each topic includes:
-- Detailed explanations
-- Code examples
-- Common pitfalls to avoid
-- Practice problems
-- Interview questions
+1. Clone this repository
+2. Navigate through the topics in order
+3. Read the explanations and study the code examples
+4. Try the practice problems
+5. Review the interview questions
 
 ## Contributing
 
-Feel free to contribute to this repository by:
-1. Adding more examples
-2. Improving existing content
-3. Adding new topics
-4. Fixing errors
-5. Adding practice problems
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
